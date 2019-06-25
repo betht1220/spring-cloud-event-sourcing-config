@@ -1,10 +1,11 @@
 spring.profiles.active: development
-
 ---
 spring:
   profiles: development
   neo4j:
-    host: ${SPRING_NEO4J_HOST:192.168.150.40}
+    username: neo4j
+    password: "!neo4j"
+    host: ${SPRING_NEO4J_HOST:localhost}
     port: ${SPRING_NEO4J_PORT:7474}
 eureka:
   instance:
@@ -13,7 +14,7 @@ eureka:
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://192.168.150.40:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 ---
 spring:
   profiles: docker
@@ -31,21 +32,9 @@ eureka:
 ---
 spring:
   profiles: test
- 
   neo4j:
-    host: ${SPRING_NEO4J_HOST:192.168.150.40} # test env, value for SPRING_NEO4J_HOST is set as environment var
-    port: ${SPRING_NEO4J_PORT:7474}           # ie right click on test class, properties, environment tab
-    username: ${SPRING_NEO4J_USERNAME:neo4j}  
-    password: ${SPRING_NEO4J_PASSWORD:password}
+    host: ${SPRING_NEO4J_HOST:192.168.99.101}
+    port: ${SPRING_NEO4J_PORT:7474}
 eureka:
   client:
     enabled: false
-    
----
-spring:
-  profiles: cloud
-  neo4j:
-    host: ${SPRING_NEO4J_HOST:192.168.150.40} # value for SPRING_NEO4J_HOST is set in manifest.yml
-    port: ${SPRING_NEO4J_PORT:7474} # value for SPRING_NEO4J_PORT is set in manifest.yml
-    username: ${SPRING_NEO4J_USERNAME:neo4j} # value for SPRING_NEO4J_USERNAME is set in manifest.yml
-    password: ${SPRING_NEO4J_PASSWORD:password}   # value for SPRING_NEO4J_PASSWORD is set in manifest.yml
