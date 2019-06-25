@@ -4,6 +4,8 @@ spring:
 ---
 spring:
   profiles: cloud
+  datasource:
+    platform: mysql
 security:
   oauth2:
     resource:
@@ -14,20 +16,22 @@ security:
 ---
 spring:
   profiles: development
+  jpa:
+    show_sql: false
+    database: MYSQL
+    generate-ddl: true
   datasource:
-    url: jdbc:mysql://localhost:3306/dev
+    url: jdbc:mysql://192.168.99.100:3306/dev
     username: root
     password: dbpass
-    platform: mysql
-#security:
-#  oauth2:
-#    resource:
-#      userInfoUri: http://192.168.99.100:8181/uaa/user
-#    client:
-#      client-id: acme
-#      access-token-uri: http://192.168.99.100:8787
-#  enable-csrf: false
-#  ignored: /api/**
+security:
+  oauth2:
+    resource:
+      userInfoUri: http://192.168.99.100:8181/uaa/user
+    client:
+      client-id: acme
+      access-token-uri: http://192.168.99.100:8787
+  enable-csrf: false
 eureka:
   instance:
     prefer-ip-address: true
